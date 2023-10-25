@@ -832,6 +832,7 @@ symbols! {
         global_allocator,
         global_asm,
         globs,
+        gp64,
         gt,
         half_open_range_patterns,
         half_open_range_patterns_in_slices,

@@ -237,6 +237,7 @@ const POWERPC_ALLOWED_FEATURES: &[(&str, Option<Symbol>)] = &[
 const MIPS_ALLOWED_FEATURES: &[(&str, Option<Symbol>)] = &[
     // tidy-alphabetical-start
     ("fp64", Some(sym::mips_target_feature)),
+    ("gp64", Some(sym::mips_target_feature)),
     ("msa", Some(sym::mips_target_feature)),
     ("virt", Some(sym::mips_target_feature)),
     // tidy-alphabetical-end

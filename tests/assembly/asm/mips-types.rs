@@ -1,6 +1,7 @@
 // revisions: mips32 mips64
 // assembly-output: emit-asm
 //[mips32] compile-flags: --target mips-unknown-linux-gnu
+//[mips32] compile-flags: -C target-feature=+gp64
 //[mips32] needs-llvm-components: mips
 //[mips64] compile-flags: --target mips64-unknown-linux-gnuabi64
 //[mips64] needs-llvm-components: mips
@@ -124,7 +125,6 @@ check!(reg_f32, f32, freg, "mov.s");
 // CHECK: #APP
 // CHECK: mov.s $f0, $f0
 // CHECK: #NO_APP
-#[no_mangle]
 check_reg!(f0_f32, f32, "$f0", "mov.s");
 
 // CHECK-LABEL: reg_f32_64:
@@ -137,21 +137,18 @@ check!(reg_f32_64, f32, freg, "mov.d");
 // CHECK: #APP
 // CHECK: mov.d $f0, $f0
 // CHECK: #NO_APP
-#[no_mangle]
 check_reg!(f0_f32_64, f32, "$f0", "mov.d");
 
 // CHECK-LABEL: reg_f64:
 // CHECK: #APP
 // CHECK: mov.d $f{{[0-9]+}}, $f{{[0-9]+}}
 // CHECK: #NO_APP
-#[no_mangle]
 check!(reg_f64, f64, freg, "mov.d");
 
 // CHECK-LABEL: f0_f64:
 // CHECK: #APP
 // CHECK: mov.d $f0, $f0
 // CHECK: #NO_APP
-#[no_mangle]
 check_reg!(f0_f64, f64, "$f0", "mov.d");
 
 // CHECK-LABEL: reg_ptr:
@@ -239,3 +236,9 @@ check_reg!(r8_u8, u8, "$8", "move");
 // CHECK: move $8, $8
 // CHECK: #NO_APP
 check_reg!(r8_i16, i16, "$8", "move");
+
+// mips32-LABEL: r8_i64:
+// mips32: #APP
+// mips32: move $8, $8
+// mips32: #NO_APP
+check_reg!(r8_i64, i64, "$8", "move");
